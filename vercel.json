@@ -1,10 +1,8 @@
 {
     "version": 2,
-    "builds": [
-      { "src": "juney.id/**/*", "use": "@vercel/static" }
-    ],
     "routes": [
-      { "src": "/(.*)", "dest": "/juney.id/index.html" }
+      { "src": "/assets/(.*)", "dest": "/juney.id/assets/$1" },  
+      { "src": "/(.*)", "dest": "/juney.id/index.html" }         
     ]
   }
   
