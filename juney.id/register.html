@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .notification {
+      display: none;
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px;
+      margin: 15px 0;
+      border: none;
+      text-align: center;
+      font-size: 16px;
+    }
+    .notification.error {
+      background-color: #f44336;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <form id="registerForm">
+      <h2>Register</h2>
+      <div class="input-field">
+        <input type="text" name="name" required>
+        <label>Enter your name</label>
+      </div>
+      <div class="input-field">
+        <input type="email" name="email" required>
+        <label>Enter your email</label>
+      </div>
+      <div class="input-field">
+        <input type="password" name="password" required>
+        <label>Enter your password</label>
+      </div>
+      <button type="submit">Register</button>
+      <div class="register">
+        <p>Already have an account? <a href="signup.html">Login</a></p>
+      </div>
+    </form>
+    <div id="notification" class="notification"></div>
+  </div>
+  
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form from submitting normally
+      
+      const formData = new FormData(this);
+      fetch('http://localhost:3000/register', {
+        method: 'POST',
+        body: new URLSearchParams(formData)
+      })
+      .then(response => response.json().then(data => ({ status: response.status, body: data }))) // Parse response as JSON
+      .then(({ status, body }) => {
+        if (status === 200) {
+          showNotification(body.message, false); // Success
+        } else {
+          showNotification(body.message, true); // Error
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        showNotification('Registration complete', true);
+      });
+    });
+
+    function showNotification(message, isError) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.classList.toggle('error', isError);
+      notification.style.display = 'block';
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 3000); // Hide after 3 seconds
+    }
+  </script>
+</body>
+</html>
