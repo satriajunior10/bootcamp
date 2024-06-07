@@ -2,7 +2,7 @@
     "version": 2,
     "routes": [
       { "src": "/assets/(.*)", "dest": "/juney.id/assets/$1" },  
-      { "src": "/(.*)", "dest": "/juney.id/index.html" }         
+      { "src": "/(.*)", "dest": "/index.html" }         
     ]
   }
   
