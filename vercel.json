@@ -2,12 +2,12 @@
     "version": 2,
     "builds": [
       {
-        "src": "index.js",
+        "src": "juney.id/index.html",
         "use": "@vercel/node"
       }
     ],
     "routes": [
-      { "src": "/(.*)", "dest": "/index.js" }
+      { "src": "/(.*)", "dest": "juney.id/index.html" }
     ]
   }
   
