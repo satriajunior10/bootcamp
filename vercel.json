@@ -7,7 +7,7 @@
       { "src": "/contact.html", "dest": "/juney.id/contact.html" },
       { "src": "/signup.html", "dest": "/juney.id/signup.html" },
       { "src": "/register.html", "dest": "/juney.id/register.html" },
-      
+      { "src": "/404.html", "dest": "/juney.id/404.html" },
       { "src": "/(.*)", "dest": "/juney.id/index.html" }
     ]
   }
