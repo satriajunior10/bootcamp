@@ -93,8 +93,8 @@ app.post("/login", (req, res) => {
       // Save user id in session
       req.session.userId = user.id;
 
-      // Redirect to index2.html after successful login
-      res.redirect("/index2.html");
+      // Redirect to juney.id/index2.html after successful login
+      res.redirect("https://juney.id/index2.html");
     });
   });
 });
