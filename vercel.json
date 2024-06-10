@@ -1,14 +1,18 @@
 {
-    "version": 2,
-    "routes": [
-      { "src": "/assets/(.*)", "dest": "/juney.id/assets/$1" },
-      { "src": "/about.html", "dest": "/juney.id/about.html" },
-      { "src": "/Bootcamp.html", "dest": "/juney.id/Bootcamp.html" },
-      { "src": "/contact.html", "dest": "/juney.id/contact.html" },
-      { "src": "/signup.html", "dest": "/juney.id/signup.html" },
-      { "src": "/register.html", "dest": "/juney.id/register.html" },
-      { "src": "/404", "dest": "/juney.id/404.html" },
-      { "src": "/(.*)", "dest": "/juney.id/index.html" }
-    ]
-  }
-  
+  "version": 2,
+  "routes": [
+    { "src": "/assets/(.*)", "dest": "/juney.id/assets/$1" },
+    { "src": "/about.html", "dest": "/juney.id/about.html" },
+    { "src": "/Bootcamp.html", "dest": "/juney.id/Bootcamp.html" },
+    { "src": "/contact.html", "dest": "/juney.id/contact.html" },
+    { "src": "/signup.html", "dest": "/juney.id/signup.html" },
+    { "src": "/register.html", "dest": "/juney.id/register.html" },
+    { "src": "/404", "dest": "/juney.id/404.html" },
+    {
+      "src": "/login",
+      "status": 302,
+      "headers": { "Location": "/juney.id/index2.html" }
+    },
+    { "src": "/(.*)", "dest": "/juney.id/index.html" }
+  ]
+}
