@@ -8,6 +8,7 @@
     { "src": "/signup.html", "dest": "/juney.id/signup.html" },
     { "src": "/register.html", "dest": "/juney.id/register.html" },
     { "src": "/404.html", "dest": "/juney.id/404.html" },
+    { "src": "/index2.html", "dest": "/juney.id/index2.html" },
     {
       "src": "/login",
       "status": 302,
