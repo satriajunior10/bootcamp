@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quiz Page</title>
+    <link rel="shortcut icon" type="image/png" href="assets/img/juney1.png">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700|Poppins:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #1a1a1a;
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+        }
+        .quiz-section {
+            margin: 50px auto;
+            width: 80%;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .quiz-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+        }
+        .option {
+            background-color: #FF5722;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px 0;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .option:hover {
+            background-color: #e64a19;
+        }
+        footer {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        #leaderboard {
+            margin-top: 20px;
+            color: #FFD700;
+        }
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .leaderboard-table th, .leaderboard-table td {
+            border: 1px solid #FFD700;
+            padding: 10px;
+            text-align: center;
+        }
+        .leaderboard-table th {
+            background-color: #1a1a1a;
+            color: #FFD700;
+        }
+        .leaderboard-table tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .leaderboard-table tr:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .wrong-answers {
+            display: none;
+            margin-top: 10px;
+            background-color: rgba(255, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .correct-answer {
+            margin-top: 10px;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index2.html">JUNEY.ID</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index2.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about2.html">Resources</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about2.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="bootcamp2.html">Product</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact2.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Quiz.html">Games</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Quiz Section -->
+    <div class="quiz-section" id="quiz-container">
+        <h2>Welcome to Juney.ID Quiz</h2>
+        <div id="name-input">
+            <input type="text" id="player-name" placeholder="Enter your name" class="form-control mb-3">
+            <button class="btn btn-primary" id="start-quiz">Start Quiz</button>
+        </div>
+        <div id="quiz" style="display:none;">
+            <div id="timer" class="text-center mb-3">Time left: <span id="time">60</span> seconds</div>
+            <div class="question">
+                <p id="question-text"></p>
+                <div class="options" id="options-container"></div>
+            </div>
+            <button class="btn btn-success" id="next-btn" style="display:none;">Next Question</button>
+        </div>
+    </div>
+
+    <div id="leaderboard" style="display:none;">
+        <h2>Leaderboard</h2>
+        <table class="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                    <th>Correct Answers</th>
+                    <th>Wrong Answers</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard-body"></tbody>
+        </table>
+        <button class="btn btn-primary" id="try-again" style="display:none;">Try Again</button>
+        <button class="btn btn-danger" id="reset-leaderboard">Reset Leaderboard</button>
+    </div>
+
+    <div id="wrong-answers-modal" class="wrong-answers">
+        <h4>Wrong Answers:</h4>
+        <ul id="wrong-answers-list"></ul>
+    </div>
+
+    <div id="correct-answers" class="correct-answer" style="display:none;">
+        <h4>Correct Answers:</h4>
+        <ul id="correct-answers-list"></ul>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 JUNEY.ID. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const questions = [
+            {
+                question: "Apa itu sistem operasi?",
+                options: ["Perangkat keras komputer", "Perangkat lunak yang mengelola perangkat keras", "Jaringan komputer", "Bahasa pemrograman"],
+                answer: "Perangkat lunak yang mengelola perangkat keras"
+            },
+            {
+                question: "Apa fungsi dari RAM dalam komputer?",
+                options: ["Menyimpan data permanen", "Menyimpan data sementara yang sedang digunakan", "Mengolah data", "Menghubungkan ke internet"],
+                answer: "Menyimpan data sementara yang sedang digunakan"
+            },
+            {
+                question: "Apa perbedaan utama antara IPv4 dan IPv6?",
+                options: ["IPv4 menggunakan 128 bit, sedangkan IPv6 menggunakan 32 bit", "IPv4 mendukung lebih banyak alamat IP daripada IPv6", "IPv4 menggunakan alamat 32 bit, sedangkan IPv6 menggunakan alamat 128 bit", "IPv4 adalah protokol nirkabel, sedangkan IPv6 adalah protokol kabel"],
+                answer: "IPv4 menggunakan alamat 32 bit, sedangkan IPv6 menggunakan alamat 128 bit"
+            },
+            {
+                question: "Apa itu URL?",
+                options: ["Protokol jaringan", "Alamat untuk mengakses situs web", "Sistem keamanan komputer", "Bahasa pemrograman"],
+                answer: "Alamat untuk mengakses situs web"
+            },
+            {
+                question: "Apa itu firewall?",
+                options: ["Perangkat lunak untuk mengedit video", "Sistem keamanan jaringan yang mencegah akses tidak sah", "Jenis virus komputer", "Alat untuk membangun jaringan"],
+                answer: "Sistem keamanan jaringan yang mencegah akses tidak sah"
+            },
+            {
+                question: "Apa itu database?",
+                options: ["Tempat menyimpan program", " Kumpulan data yang terstruktur", "Sistem operasi", "Perangkat keras komputer"],
+                answer: "Kumpulan data yang terstruktur"
+            },
+            {
+                question: "Apa itu IP address?",
+                options: ["Identifikasi perangkat dalam jaringan", "Alamat email", "Kode pemrograman", "Sistem operasi"],
+                answer: "Identifikasi perangkat dalam jaringan"
+            },
+            {
+                question: "Apa fungsi dari CPU?",
+                options: ["Menyimpan data", "Mengolah instruksi dan data", "Menghubungkan ke internet", "Menampilkan informasi"],
+                answer: "Mengolah instruksi dan data"
+            },
+            {
+                question: "Apa yang dimaksud dengan Normalisasi dalam database?",
+                options: ["Proses menambah data", "Proses mengurangi redundansi data", "Proses memformat data", " Proses membuat backup"],
+                answer: "Proses mengurangi redundansi data"
+            },
+            {
+                question: "Apa yang dimaksud dengan open source?",
+                options: ["Perangkat lunak yang tidak dapat diubah", "Perangkat lunak yang kode sumbernya dapat diakses dan dimodifikasi", "Program untuk mengedit foto", "Sistem operasi"],
+                answer: "Perangkat lunak yang kode sumbernya dapat diakses dan dimodifikasi"
+            },
+            {
+                question: "Apa itu ASCII?",
+                options: ["Kode untuk menghubungkan jaringan", "Kode karakter yang digunakan untuk representasi teks", "Jenis virus komputer", "Sistem operasi"],
+                answer: "Kode karakter yang digunakan untuk representasi teks"
+            },
+            {
+                question: "Apa itu SSL?",
+                options: ["Protokol keamanan untuk mengamankan koneksi internet", "Jenis virus komputer", " Alat pengedit gambar", "Sistem operasi"],
+                answer: "Protokol keamanan untuk mengamankan koneksi internet"
+            },
+            {
+                question: "Apa itu VPN?",
+                options: ["Jaringan yang menghubungkan perangkat tanpa kabel", "Koneksi aman yang mengenkripsi data di internet", "Sistem penyimpanan data", "Program untuk mengedit video"],
+                answer: "Koneksi aman yang mengenkripsi data di internet"
+            },
+            {
+                question: "Apa itu SEO?",
+                options: ["Proses untuk meningkatkan visibilitas situs web di mesin pencari", "Sistem operasi", "Program untuk mengedit video", "Jenis perangkat keras"],
+                answer: "Proses untuk meningkatkan visibilitas situs web di mesin pencari"
+            },
+            {
+                question: "Apa itu data encryption?",
+                options: ["Proses menghapus data", "Proses mengubah data menjadi format yang tidak dapat dibaca ", "Pengumpulan data", "Proses untuk mengubah data menjadi format yang bisa dibaca"],
+                answer:  "Proses mengubah data menjadi format yang tidak dapat dibaca"
+            },
+            {
+                question: "Apa itu website?",
+                options: ["Kumpulan program komputer", "Kumpulan halaman yang dapat diakses melalui internet", "Sistem operasi", "Jaringan komputer"],
+                answer: "Kumpulan halaman yang dapat diakses melalui internet"
+            },
+            {
+                question: "Apa itu web hosting?",
+                options: ["Proses mendesain website", "Layanan untuk menyimpan dan mengakses situs web", "Sistem operasi", "Jaringan komputer"],
+                answer: "Layanan untuk menyimpan dan mengakses situs web"
+            },
+            {
+                question: "Apa itu domain?",
+                options: ["Alamat IP komputer", "Nama unik untuk mengidentifikasi situs web", "Program untuk mengedit video", "Jaringan komputer"],
+                answer: "Nama unik untuk mengidentifikasi situs web"
+            },
+            {
+                question: "Apa itu HTTP?",
+                options: ["Protokol untuk transfer data di web", "Sistem operasi", "Program untuk mengedit foto", "Jenis virus komputer"],
+                answer: "Protokol untuk transfer data di web"
+            },
+            {
+                question: "Apa itu SSL (Secure Sockets Layer)?",
+                options: ["Protokol untuk mengamankan koneksi internet", "Jenis virus komputer", "Alat pengedit gambar", "Sistem operasi"],
+                answer: "Protokol untuk mengamankan koneksi internet"
+            },
+            {
+                question: "Apa perbedaan antara HTTP dan HTTPS?",
+                options: ["HTTP lebih cepat daripada HTTPS", "HTTPS menggunakan enkripsi untuk keamanan, sementara HTTP tidak", "HTTP adalah protokol untuk email", "HTTPS hanya digunakan untuk situs berita"],
+                answer: "Koneksi aman yang mengenkripsi data di internet"
+            },
+            {
+                question: "Apa itu SQL Injection?",
+                options: ["Teknik untuk meningkatkan kecepatan database", "Serangan yang mengeksploitasi celah dalam sistem database", "Proses backup database", "Metode untuk mengoptimalkan kueri"],
+                answer: "Serangan yang mengeksploitasi celah dalam sistem database"
+            },
+            {
+                question: "Apa itu Big O Notation?",
+                options: ["Metode untuk menyimpan data", "Notasi untuk menggambarkan kompleksitas algoritma", "Protokol untuk komunikasi jaringan", "Sistem untuk manajemen proyek"],
+                answer: "Notasi untuk menggambarkan kompleksitas algoritma"
+            },
+            {
+                question: "Apa yang dimaksud dengan Virtual Machine (VM)?",
+                options: ["Komputer fisik", "Perangkat lunak yang memungkinkan menjalankan sistem operasi di dalam sistem operasi lain", "Program untuk mengedit video", "Jaringan komputer"],
+                answer: "Perangkat lunak yang memungkinkan menjalankan sistem operasi di dalam sistem operasi lain"
+            },
+            {
+                question: "Apa yang dimaksud dengan Agile?",
+                options: ["Metodologi manajemen proyek yang mengutamakan fleksibilitas dan kolaborasi", "Proses pengolahan data", "Jaringan komputer", " Sistem operasi"],
+                answer: "Metodologi manajemen proyek yang mengutamakan fleksibilitas dan kolaborasi"
+            },
+            {
+                question: "Apa yang dimaksud dengan Frontend dan Backend dalam pengembangan web?",
+                options: ["Frontend adalah sisi server, Backend adalah sisi klien", "Frontend adalah antarmuka pengguna, Backend adalah logika dan database", "Frontend adalah database, Backend adalah program", "Tidak ada perbedaan"],
+                answer: "Frontend adalah antarmuka pengguna, Backend adalah logika dan database"
+            },
+            {
+                question: "Apa itu API Gateway?",
+                options: ["Penghubung antara pengguna dan aplikasi", "Pintu gerbang untuk mengelola dan memantau permintaan API", "Jaringan komputer", "Sistem penyimpanan data"],
+                answer: "Pintu gerbang untuk mengelola dan memantau permintaan API"
+            },
+            {
+                question: "Apa perbedaan utama antara stack dan heap dalam manajemen memori?",
+                options: ["Stack digunakan untuk data statis, sedangkan heap digunakan untuk data dinamis", "Heap lebih cepat daripada stack", "Stack digunakan untuk menyimpan data jaringan, sedangkan heap digunakan untuk penyimpanan lokal", "Stack memiliki ukuran yang tidak terbatas"],
+                answer: "Stack digunakan untuk data statis, sedangkan heap digunakan untuk data dinamis"
+            },
+            {
+                question: "Apa fungsi dari git rebase dalam kontrol versi?",
+                options: ["Menyatukan perubahan dari dua cabang berbeda ke dalam satu commit baru", "Menghapus semua perubahan dari repository", "Mengubah nama cabang", "Menyalin file dari satu repositori ke repositori lain"],
+                answer: "Menyatukan perubahan dari dua cabang berbeda ke dalam satu commit baru"
+            },
+            {
+                question: "Apa yang dimaksud dengan Garbage Collection dalam bahasa pemrograman seperti Java?",
+                options: [" Proses menghapus file sementara", "Mekanisme untuk secara otomatis mengelola memori dengan membebaskan ruang yang tidak lagi digunakan", "Proses kompilasi kode", "Alat untuk mengamankan data"],
+                answer: "Mekanisme untuk secara otomatis mengelola memori dengan membebaskan ruang yang tidak lagi digunakan"
+            },
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let wrongAnswers = [];
+        let timer;
+        let timeLeft = 180;
+        const leaderboardScores = JSON.parse(localStorage.getItem('leaderboardScores')) || [];
+
+        document.getElementById('start-quiz').addEventListener('click', () => {
+            const name = document.getElementById('player-name').value;
+            if (name) {
+                document.getElementById('name-input').style.display = 'none';
+                document.getElementById('quiz').style.display = 'block';
+                Quiz();
+            } else {
+                alert('Please enter your name.');
+            }
+        });
+
+        function Quiz() {
+            loadQuestion();
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('time').innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    endQuiz();
+                }
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById('question-text').innerText = currentQuestion.question;
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'option';
+                button.innerText = option;
+                button.addEventListener('click', () => handleAnswer(option));
+                optionsContainer.appendChild(button);
+            });
+            document.getElementById('next-btn').style.display = 'none';
+        }
+
+        function handleAnswer(selectedOption) {
+            const currentQuestion = questions[currentQuestionIndex];
+            if (selectedOption === currentQuestion.answer) {
+                score++;
+            } else {
+                wrongAnswers.push(currentQuestion.question + " - " + selectedOption + " (Correct: " + currentQuestion.answer + ")");
+            }
+            document.getElementById('next-btn').style.display = 'block';
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                document.getElementById('next-btn').addEventListener('click', loadQuestion);
+            } else {
+                document.getElementById('next-btn').addEventListener('click', endQuiz);
+            }
+        }
+
+        function endQuiz() {
+            clearInterval(timer);
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('leaderboard').style.display = 'block';
+            const playerName = document.getElementById('player-name').value;
+            const correctAnswers = score;
+            const wrongAnswersCount = questions.length - score;
+
+            leaderboardScores.push({ 
+                name: playerName, 
+                score: score,
+                correctAnswers: correctAnswers,
+                wrongAnswers: wrongAnswersCount,
+                wrongAnswersList: wrongAnswers
+            });
+            localStorage.setItem('leaderboardScores', JSON.stringify(leaderboardScores));
+            displayLeaderboard();
+            document.getElementById('try-again').style.display = 'block';
+            document.getElementById('reset-leaderboard').style.display = 'block';
+        }
+
+        function displayLeaderboard() {
+            const leaderboardBody = document.getElementById('leaderboard-body');
+            leaderboardBody.innerHTML = '';
+            leaderboardScores.sort((a, b) => b.score - a.score);
+            leaderboardScores.forEach((entry, index) => {
+                const wrongAnswerCount = entry.wrongAnswersList.length;
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${index + 1}</td><td>${entry.name}</td><td>${entry.score}</td><td>${entry.correctAnswers}</td><td><button class="btn btn-link" onclick="showWrongAnswers('${entry.name}')">${wrongAnswerCount}</button></td>`;
+                leaderboardBody.appendChild(row);
+            });
+        }
+
+        function showWrongAnswers(name) {
+            const entry = leaderboardScores.find(score => score.name === name);
+            const wrongAnswersList = document.getElementById('wrong-answers-list');
+            wrongAnswersList.innerHTML = '';
+            entry.wrongAnswersList.forEach(wrong => {
+                const listItem = document.createElement('li');
+                listItem.innerText = wrong;
+                wrongAnswersList.appendChild(listItem);
+            });
+            document.getElementById('wrong-answers-modal').style.display = 'block';
+        }
+
+        document.getElementById('try-again').addEventListener('click', () => {
+            location.reload();
+        });
+
+        document.getElementById('reset-leaderboard').addEventListener('click', () => {
+            localStorage.removeItem('leaderboardScores');
+            leaderboardScores.length = 0; // Clear the in-memory scores
+            displayLeaderboard();
+        });
+    </script>
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
