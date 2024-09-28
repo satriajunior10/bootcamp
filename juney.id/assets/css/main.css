@@ -1557,27 +1557,38 @@ div.owl-controls,
 
 ----------------------------------------------------------------------------- */
 .news-bg-1 {
-  background-image: url(../img/product1.jpeg);
+  background-image: url(../img/webdevelopment.jpg);
 }
 
 .news-bg-2 {
-  background-image: url(../img/astronot4.jpg);
+  background-image: url(../img/siber.jpeg);
 }
 
 .news-bg-3 {
-  background-image: url(../img/product1.jpeg);
+  background-image: url(../img/softwareengineer.jpg);
 }
 
 .news-bg-4 {
-  background-image: url(../img/product1.jpeg);
+  background-image: url(../img/uiux.png);
 }
 
 .news-bg-5 {
-  background-image: url(../img/product1.jpeg);
+  background-image: url(../img/cloudcomputing.jpg);
 }
 
 .news-bg-6 {
-  background-image: url(../img/product1.jpeg);
+  background-image: url(../img/mobiledevelopment.jpeg);
+}
+
+.news-bg-7 {
+  background-image: url(../img/datascience.jpeg);
+}
+
+.news-bg-8 {
+  background-image: url(../img/digitalmarketing2.jpeg);
+}
+.news-bg-9 {
+  background-image: url(../img/astronot8.jpg);
 }
 
 .latest-news-bg {

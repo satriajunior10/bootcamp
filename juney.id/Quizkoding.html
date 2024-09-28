@@ -177,156 +177,157 @@
     <script>
         const questions = [
             {
-                question: "Apa itu sistem operasi?",
-                options: ["Perangkat keras komputer", "Perangkat lunak yang mengelola perangkat keras", "Jaringan komputer", "Bahasa pemrograman"],
-                answer: "Perangkat lunak yang mengelola perangkat keras"
+                question: "Apa yang akan dicetak oleh kode ini: print(2 + 3 * 4)?",
+                options: ["20", "14", "26", "8"],
+                answer: "14"
             },
             {
-                question: "Apa fungsi dari RAM dalam komputer?",
-                options: ["Menyimpan data permanen", "Menyimpan data sementara yang sedang digunakan", "Mengolah data", "Menghubungkan ke internet"],
-                answer: "Menyimpan data sementara yang sedang digunakan"
+                question: "Apa yang hilang di sini: if ___ == 10: print('Sama')?",
+                options: ["x", "y", "a", "b"],
+                answer: "x"
             },
             {
-                question: "Apa perbedaan utama antara IPv4 dan IPv6?",
-                options: ["IPv4 menggunakan 128 bit, sedangkan IPv6 menggunakan 32 bit", "IPv4 mendukung lebih banyak alamat IP daripada IPv6", "IPv4 menggunakan alamat 32 bit, sedangkan IPv6 menggunakan alamat 128 bit", "IPv4 adalah protokol nirkabel, sedangkan IPv6 adalah protokol kabel"],
-                answer: "IPv4 menggunakan alamat 32 bit, sedangkan IPv6 menggunakan alamat 128 bit"
+                question: "Apa yang akan dicetak oleh kode ini: for i in range(3): print(i)?",
+                options: ["0 1 2", "0 1 2 3", "1 2 3", "3"],
+                answer: "0 1 2"
             },
             {
-                question: "Apa itu URL?",
-                options: ["Protokol jaringan", "Alamat untuk mengakses situs web", "Sistem keamanan komputer", "Bahasa pemrograman"],
-                answer: "Alamat untuk mengakses situs web"
+                question: "Sebutkan tipe data berikut yang benar: ___ = [1, 2, 3]?",
+                options: ["tuple", "set", "list", "dictionary"],
+                answer: "list"
             },
             {
-                question: "Apa itu firewall?",
-                options: ["Perangkat lunak untuk mengedit video", "Sistem keamanan jaringan yang mencegah akses tidak sah", "Jenis virus komputer", "Alat untuk membangun jaringan"],
-                answer: "Sistem keamanan jaringan yang mencegah akses tidak sah"
+                question: "Apa yang hilang di sini: def my_function(___): pass?",
+                options: ["arg", "args", "function", "param"],
+                answer: "arg"
             },
             {
-                question: "Apa itu database?",
-                options: ["Tempat menyimpan program", " Kumpulan data yang terstruktur", "Sistem operasi", "Perangkat keras komputer"],
-                answer: "Kumpulan data yang terstruktur"
+                question: "Apa yang akan dicetak oleh kode ini: print('Hello' + ' World')?",
+                options: ["Hello World", "HelloWorld", "Hello+World", "Hello World!"],
+                answer: "Hello World"
             },
             {
-                question: "Apa itu IP address?",
-                options: ["Identifikasi perangkat dalam jaringan", "Alamat email", "Kode pemrograman", "Sistem operasi"],
-                answer: "Identifikasi perangkat dalam jaringan"
+                question: "Apa yang hilang di sini: x = [1, 2, 3]; print(x[___])?",
+                options: ["1", "0", "2", "3"],
+                answer: "0"
             },
             {
-                question: "Apa fungsi dari CPU?",
-                options: ["Menyimpan data", "Mengolah instruksi dan data", "Menghubungkan ke internet", "Menampilkan informasi"],
-                answer: "Mengolah instruksi dan data"
+                question: "Apa yang akan dicetak oleh kode ini: print(len('Python'))?",
+                options: ["5", "6", "7", "8"],
+                answer: "6"
             },
             {
-                question: "Apa yang dimaksud dengan Normalisasi dalam database?",
-                options: ["Proses menambah data", "Proses mengurangi redundansi data", "Proses memformat data", " Proses membuat backup"],
-                answer: "Proses mengurangi redundansi data"
+                question: "Apa yang hilang di sini: my_list = [1, 2, 3]; my_list.____(4)?",
+                options: ["append", "add", "insert", "extend"],
+                answer: "append"
             },
             {
-                question: "Apa yang dimaksud dengan open source?",
-                options: ["Perangkat lunak yang tidak dapat diubah", "Perangkat lunak yang kode sumbernya dapat diakses dan dimodifikasi", "Program untuk mengedit foto", "Sistem operasi"],
-                answer: "Perangkat lunak yang kode sumbernya dapat diakses dan dimodifikasi"
+                question: "Sebutkan method yang digunakan untuk mengubah string menjadi huruf kapital: string.____()?",
+                options: ["capitalize", "upper", "title", "lower"],
+                answer: "upper"
             },
             {
-                question: "Apa itu ASCII?",
-                options: ["Kode untuk menghubungkan jaringan", "Kode karakter yang digunakan untuk representasi teks", "Jenis virus komputer", "Sistem operasi"],
-                answer: "Kode karakter yang digunakan untuk representasi teks"
+                question: "Apa yang akan dicetak oleh kode ini: print(2 ** 3)?",
+                options: ["6", "8", "9", "7"],
+                answer: "8"
             },
             {
-                question: "Apa itu SSL?",
-                options: ["Protokol keamanan untuk mengamankan koneksi internet", "Jenis virus komputer", " Alat pengedit gambar", "Sistem operasi"],
-                answer: "Protokol keamanan untuk mengamankan koneksi internet"
+                question: "Apa yang hilang di sini: for i in range(5): if i == 2: ___ print(i)?",
+                options: ["break", "continue", "return", "pass"],
+                answer: "continue"
             },
             {
-                question: "Apa itu VPN?",
-                options: ["Jaringan yang menghubungkan perangkat tanpa kabel", "Koneksi aman yang mengenkripsi data di internet", "Sistem penyimpanan data", "Program untuk mengedit video"],
-                answer: "Koneksi aman yang mengenkripsi data di internet"
+                question: "Apa yang akan dicetak oleh kode ini: print(5 // 2)?",
+                options: ["2.5", "2", "3", "2.0"],
+                answer: "2"
             },
             {
-                question: "Apa itu SEO?",
-                options: ["Proses untuk meningkatkan visibilitas situs web di mesin pencari", "Sistem operasi", "Program untuk mengedit video", "Jenis perangkat keras"],
-                answer: "Proses untuk meningkatkan visibilitas situs web di mesin pencari"
+                question: "Apa yang hilang di sini: try: print(1 / 0) except: ___?",
+                options: ["ZeroDivisionError", "TypeError", "ValueError", "KeyError"],
+                answer: "ZeroDivisionError"
             },
             {
-                question: "Apa itu data encryption?",
-                options: ["Proses menghapus data", "Proses mengubah data menjadi format yang tidak dapat dibaca ", "Pengumpulan data", "Proses untuk mengubah data menjadi format yang bisa dibaca"],
-                answer:  "Proses mengubah data menjadi format yang tidak dapat dibaca"
+                question: "Apa yang akan dicetak oleh kode ini: print(type(3.14))?",
+                options: ["int", "float", "str", "complex"],
+                answer: "float"
             },
             {
-                question: "Apa itu website?",
-                options: ["Kumpulan program komputer", "Kumpulan halaman yang dapat diakses melalui internet", "Sistem operasi", "Jaringan komputer"],
-                answer: "Kumpulan halaman yang dapat diakses melalui internet"
+                question: "Apa yang hilang di sini: def greet(name): print('Hello', ___)?",
+                options: ["name", "name()", "name[]", "name{}"],
+                answer: "name"
             },
             {
-                question: "Apa itu web hosting?",
-                options: ["Proses mendesain website", "Layanan untuk menyimpan dan mengakses situs web", "Sistem operasi", "Jaringan komputer"],
-                answer: "Layanan untuk menyimpan dan mengakses situs web"
+                question: "Sebutkan keyword untuk mendefinisikan kelas di Python: ___ MyClass: pass?",
+                options: ["class", "def", "function", "method"],
+                answer: "class"
             },
             {
-                question: "Apa itu domain?",
-                options: ["Alamat IP komputer", "Nama unik untuk mengidentifikasi situs web", "Program untuk mengedit video", "Jaringan komputer"],
-                answer: "Nama unik untuk mengidentifikasi situs web"
+                question: "Apa yang akan dicetak oleh kode ini: print(5 == 5)?",
+                options: ["True", "False", "5", "5 == 5"],
+                answer: "True"
             },
             {
-                question: "Apa itu HTTP?",
-                options: ["Protokol untuk transfer data di web", "Sistem operasi", "Program untuk mengedit foto", "Jenis virus komputer"],
-                answer: "Protokol untuk transfer data di web"
+                question: "Apa yang hilang di sini: dict = { 'a': 1, 'b': 2}; print(dict['___'])?",
+                options: ["a", "b", "c", "d"],
+                answer: "a"
             },
             {
-                question: "Apa itu SSL (Secure Sockets Layer)?",
-                options: ["Protokol untuk mengamankan koneksi internet", "Jenis virus komputer", "Alat pengedit gambar", "Sistem operasi"],
-                answer: "Protokol untuk mengamankan koneksi internet"
+                question: "Apa yang akan dicetak oleh kode ini: print(bool(0))?",
+                options: ["True", "False", "1", "0"],
+                answer: "False"
             },
             {
-                question: "Apa perbedaan antara HTTP dan HTTPS?",
-                options: ["HTTP lebih cepat daripada HTTPS", "HTTPS menggunakan enkripsi untuk keamanan, sementara HTTP tidak", "HTTP adalah protokol untuk email", "HTTPS hanya digunakan untuk situs berita"],
-                answer: "Koneksi aman yang mengenkripsi data di internet"
+                question: "Apa yang hilang di sini: name = 'John'; print(f'Hello, ___')?",
+                options: ["name", "John", "f'name'", "Hello"],
+                answer: "name"
             },
             {
-                question: "Apa itu SQL Injection?",
-                options: ["Teknik untuk meningkatkan kecepatan database", "Serangan yang mengeksploitasi celah dalam sistem database", "Proses backup database", "Metode untuk mengoptimalkan kueri"],
-                answer: "Serangan yang mengeksploitasi celah dalam sistem database"
+                question: "Apa yang akan dicetak oleh kode ini: x = [1, 2, 3]; print(x[::-1])?",
+                options: ["[3, 2, 1]", "[1, 2, 3]", "[1, 3]", "[2, 3]"],
+                answer: "[3, 2, 1]"
             },
             {
-                question: "Apa itu Big O Notation?",
-                options: ["Metode untuk menyimpan data", "Notasi untuk menggambarkan kompleksitas algoritma", "Protokol untuk komunikasi jaringan", "Sistem untuk manajemen proyek"],
-                answer: "Notasi untuk menggambarkan kompleksitas algoritma"
+                question: "Apa yang hilang di sini: x = {1, 2, 3}; x.____(4)?",
+                options: ["add", "append", "insert", "include"],
+                answer: "add"
             },
             {
-                question: "Apa yang dimaksud dengan Virtual Machine (VM)?",
-                options: ["Komputer fisik", "Perangkat lunak yang memungkinkan menjalankan sistem operasi di dalam sistem operasi lain", "Program untuk mengedit video", "Jaringan komputer"],
-                answer: "Perangkat lunak yang memungkinkan menjalankan sistem operasi di dalam sistem operasi lain"
+                question: "Sebutkan method untuk menghapus item dari list: my_list.____(item)?",
+                options: ["remove", "delete", "discard", "pop"],
+                answer: "remove"
             },
             {
-                question: "Apa yang dimaksud dengan Agile?",
-                options: ["Metodologi manajemen proyek yang mengutamakan fleksibilitas dan kolaborasi", "Proses pengolahan data", "Jaringan komputer", " Sistem operasi"],
-                answer: "Metodologi manajemen proyek yang mengutamakan fleksibilitas dan kolaborasi"
+                question: "Apa yang akan dicetak oleh kode ini: print('Python'.find('t'))?",
+                options: ["0", "1", "2", "3"],
+                answer: "2"
             },
             {
-                question: "Apa yang dimaksud dengan Frontend dan Backend dalam pengembangan web?",
-                options: ["Frontend adalah sisi server, Backend adalah sisi klien", "Frontend adalah antarmuka pengguna, Backend adalah logika dan database", "Frontend adalah database, Backend adalah program", "Tidak ada perbedaan"],
-                answer: "Frontend adalah antarmuka pengguna, Backend adalah logika dan database"
+                question: "Apa yang hilang di sini: x = [1, 2, 3]; print(sum(x)) ___ 6?",
+                options: ["==", ">", "<", "!="],
+                answer: "=="
             },
             {
-                question: "Apa itu API Gateway?",
-                options: ["Penghubung antara pengguna dan aplikasi", "Pintu gerbang untuk mengelola dan memantau permintaan API", "Jaringan komputer", "Sistem penyimpanan data"],
-                answer: "Pintu gerbang untuk mengelola dan memantau permintaan API"
+                question: "Apa yang akan dicetak oleh kode ini: print(3 + 4 * 2)?",
+                options: ["14", "11", "10", "8"],
+                answer: "11"
             },
             {
-                question: "Apa perbedaan utama antara stack dan heap dalam manajemen memori?",
-                options: ["Stack digunakan untuk data statis, sedangkan heap digunakan untuk data dinamis", "Heap lebih cepat daripada stack", "Stack digunakan untuk menyimpan data jaringan, sedangkan heap digunakan untuk penyimpanan lokal", "Stack memiliki ukuran yang tidak terbatas"],
-                answer: "Stack digunakan untuk data statis, sedangkan heap digunakan untuk data dinamis"
+                question: "Apa yang hilang di sini: list1 = [1, 2]; list2 = [3, 4]; print(list1 + ___)?",
+                options: ["list2", "list3", "list1", "list4"],
+                answer: "list2"
             },
             {
-                question: "Apa fungsi dari git rebase dalam kontrol versi?",
-                options: ["Menyatukan perubahan dari dua cabang berbeda ke dalam satu commit baru", "Menghapus semua perubahan dari repository", "Mengubah nama cabang", "Menyalin file dari satu repositori ke repositori lain"],
-                answer: "Menyatukan perubahan dari dua cabang berbeda ke dalam satu commit baru"
+                question: "Apa yang akan dicetak oleh kode ini: print(len([1, 2, 3, 4]))?",
+                options: ["4", "3", "2", "1"],
+                answer: "4"
             },
             {
-                question: "Apa yang dimaksud dengan Garbage Collection dalam bahasa pemrograman seperti Java?",
-                options: [" Proses menghapus file sementara", "Mekanisme untuk secara otomatis mengelola memori dengan membebaskan ruang yang tidak lagi digunakan", "Proses kompilasi kode", "Alat untuk mengamankan data"],
-                answer: "Mekanisme untuk secara otomatis mengelola memori dengan membebaskan ruang yang tidak lagi digunakan"
+                question: "Apa yang hilang di sini: with open('file.txt', 'r') as f: ___ f.read()?",
+                options: ["print", "return", "write", "save"],
+                answer: "print"
             },
         ];
+
 
         let currentQuestionIndex = 0;
         let score = 0;
