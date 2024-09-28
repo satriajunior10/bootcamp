@@ -1590,6 +1590,18 @@ div.owl-controls,
 .news-bg-9 {
   background-image: url(../img/astronot8.jpg);
 }
+.news-bg-10 {
+  background-image: url(../img/astronot9.png);
+}
+.news-bg-11 {
+  background-image: url(../img/gamesAstronot.jpg);
+}
+.news-bg-12 {
+  background-image: url(../img/gamesAstronot2.jpg);
+}
+.news-bg-13 {
+  background-image: url(../img/gamesAstronot3.png);
+}
 
 .latest-news-bg {
   height: 200px;
@@ -2150,6 +2162,10 @@ a.video-play-btn {
 .team-bg-4 {
   background-image: url(../img/team/team-4.jpg);
 }
+.team-bg-5 {
+  background-image: url(../img/astronot9.png);
+}
+
 
 .team-bg {
   height: 400px;

@@ -116,7 +116,7 @@
                     <li class="nav-item"><a class="nav-link" href="about2.html">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="bootcamp2.html">Product</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact2.html">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="Quiz.html">Games</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ListGames.html">Games</a></li>
                     <li class="nav-item"><a class="nav-link" href="Knowladge.html">Knowladge</a></li>
                     
                 </ul>
@@ -126,7 +126,7 @@
 
     <!-- Quiz Section -->
     <div class="quiz-section" id="quiz-container">
-        <h2>Welcome to Juney.ID Quiz</h2>
+        <h2>Cyber Shield</h2>
         <div id="name-input">
             <input type="text" id="player-name" placeholder="Enter your name" class="form-control mb-3">
             <button class="btn btn-primary" id="start-quiz">Start Quiz</button>
@@ -175,6 +175,8 @@
     </footer>
 
     <script>
+        // Set ID unik untuk QuizKoding
+        const currentGameId = 'quizCyber'; // Ganti ini jika ingin membuat menu quiz yang berbeda
         const questions = [
             {
                 question: "Apa itu cybersecurity?",
@@ -329,128 +331,130 @@
         ];
 
         let currentQuestionIndex = 0;
-        let score = 0;
-        let wrongAnswers = [];
-        let timer;
-        let timeLeft = 180;
-        const leaderboardScores = JSON.parse(localStorage.getItem('leaderboardScores')) || [];
+            let score = 0;
+            let wrongAnswers = [];
+            let timer;
+            let timeLeft = 180;
+            const leaderboardKey = `leaderboardScores_${currentGameId}`; // Use unique key for each quiz menu
+            const leaderboardScores = JSON.parse(localStorage.getItem(leaderboardKey)) || []; // Load only scores for the currentGameId
 
-        document.getElementById('start-quiz').addEventListener('click', () => {
-            const name = document.getElementById('player-name').value;
-            if (name) {
-                document.getElementById('name-input').style.display = 'none';
-                document.getElementById('quiz').style.display = 'block';
-                resetQuiz();
-                loadQuestion();
-                startTimer();
-            } else {
-                alert('Please enter your name.');
+            document.getElementById('start-quiz').addEventListener('click', () => {
+                const name = document.getElementById('player-name').value;
+                if (name) {
+                    document.getElementById('name-input').style.display = 'none';
+                    document.getElementById('quiz').style.display = 'block';
+                    resetQuiz();
+                    loadQuestion();
+                    startTimer();
+                } else {
+                    alert('Please enter your name.');
+                }
+            });
+
+            function resetQuiz() {
+                score = 0;
+                wrongAnswers = [];
+                currentQuestionIndex = 0;
+                timeLeft = 180;
+                shuffleQuestions(); // Shuffle questions for a new quiz
+                document.getElementById('next-btn').style.display = 'none';
+                document.getElementById('options-container').innerHTML = '';
             }
-        });
 
-        function resetQuiz() {
-            score = 0;
-            wrongAnswers = [];
-            currentQuestionIndex = 0;
-            timeLeft = 180;
-            shuffleQuestions(); // Shuffle questions for a new quiz
-            document.getElementById('next-btn').style.display = 'none';
-            document.getElementById('options-container').innerHTML = '';
-        }
+            function startTimer() {
+                timer = setInterval(() => {
+                    timeLeft--;
+                    document.getElementById('time').innerText = timeLeft;
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        endQuiz();
+                    }
+                }, 1000);
+            }
 
-        function startTimer() {
-            timer = setInterval(() => {
-                timeLeft--;
-                document.getElementById('time').innerText = timeLeft;
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
+            function loadQuestion() {
+                if (currentQuestionIndex < questions.length) {
+                    const currentQuestion = questions[currentQuestionIndex];
+                    document.getElementById('question-text').innerText = currentQuestion.question;
+                    const optionsContainer = document.getElementById('options-container');
+                    optionsContainer.innerHTML = '';
+                    currentQuestion.options.forEach(option => {
+                        const button = document.createElement('button');
+                        button.className = 'option btn btn-primary m-1';
+                        button.innerText = option;
+                        button.addEventListener('click', () => handleAnswer(option));
+                        optionsContainer.appendChild(button);
+                    });
+                    document.getElementById('next-btn').style.display = 'none'; // Hide the next button initially
+                } else {
                     endQuiz();
                 }
-            }, 1000);
-        }
+            }
 
-        function loadQuestion() {
-            if (currentQuestionIndex < questions.length) {
+            function handleAnswer(selectedOption) {
                 const currentQuestion = questions[currentQuestionIndex];
-                document.getElementById('question-text').innerText = currentQuestion.question;
-                const optionsContainer = document.getElementById('options-container');
-                optionsContainer.innerHTML = '';
-                currentQuestion.options.forEach(option => {
-                    const button = document.createElement('button');
-                    button.className = 'option btn btn-primary m-1';
-                    button.innerText = option;
-                    button.addEventListener('click', () => handleAnswer(option));
-                    optionsContainer.appendChild(button);
+                if (selectedOption === currentQuestion.answer) {
+                    score++;
+                } else {
+                    wrongAnswers.push(`${currentQuestion.question} - ${selectedOption} (Correct: ${currentQuestion.answer})`);
+                }
+                currentQuestionIndex++;
+                document.getElementById('next-btn').style.display = 'block'; // Show the next button after answering
+            }
+
+            document.getElementById('next-btn').addEventListener('click', () => {
+                loadQuestion(); // Load the next question
+            });
+
+            function endQuiz() {
+                clearInterval(timer);
+                document.getElementById('quiz').style.display = 'none';
+                document.getElementById('leaderboard').style.display = 'block';
+                const playerName = document.getElementById('player-name').value;
+                const correctAnswers = score;
+                const wrongAnswersCount = questions.length - score;
+
+                // Save score only for this quiz
+                leaderboardScores.push({ 
+                    name: playerName, 
+                    score: score,
+                    correctAnswers: correctAnswers,
+                    wrongAnswers: wrongAnswersCount,
+                    wrongAnswersList: wrongAnswers
                 });
-                document.getElementById('next-btn').style.display = 'none'; // Hide the next button initially
-            } else {
-                endQuiz();
+                localStorage.setItem(leaderboardKey, JSON.stringify(leaderboardScores)); // Save only for the currentGameId
+                displayLeaderboard();
+                document.getElementById('try-again').style.display = 'block';
+                document.getElementById('reset-leaderboard').style.display = 'block';
             }
-        }
 
-        function handleAnswer(selectedOption) {
-            const currentQuestion = questions[currentQuestionIndex];
-            if (selectedOption === currentQuestion.answer) {
-                score++;
-            } else {
-                wrongAnswers.push(currentQuestion.question + " - " + selectedOption + " (Correct: " + currentQuestion.answer + ")");
+            function displayLeaderboard() {
+                const leaderboardBody = document.getElementById('leaderboard-body');
+                leaderboardBody.innerHTML = '';
+                leaderboardScores.sort((a, b) => b.score - a.score);
+                leaderboardScores.forEach((entry, index) => {
+                    const wrongAnswerCount = entry.wrongAnswersList.length;
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${index + 1}</td><td>${entry.name}</td><td>${entry.score}</td><td>${entry.correctAnswers}</td><td><button class="btn btn-link" onclick="showWrongAnswers('${entry.name}')">${wrongAnswerCount}</button></td>`;
+                    leaderboardBody.appendChild(row);
+                });
             }
-            currentQuestionIndex++;
-            document.getElementById('next-btn').style.display = 'block'; // Show the next button after answering
-        }
 
-        document.getElementById('next-btn').addEventListener('click', () => {
-            loadQuestion(); // Load the next question
-        });
+            function showWrongAnswers(name) {
+                const entry = leaderboardScores.find(score => score.name === name);
+                const wrongAnswersList = document.getElementById('wrong-answers-list');
+                wrongAnswersList.innerHTML = '';
+                entry.wrongAnswersList.forEach(wrong => {
+                    const listItem = document.createElement('li');
+                    listItem.innerText = wrong;
+                    wrongAnswersList.appendChild(listItem);
+                });
+                document.getElementById('wrong-answers-modal').style.display = 'block';
+            }
 
-        function endQuiz() {
-            clearInterval(timer);
-            document.getElementById('quiz').style.display = 'none';
-            document.getElementById('leaderboard').style.display = 'block';
-            const playerName = document.getElementById('player-name').value;
-            const correctAnswers = score;
-            const wrongAnswersCount = questions.length - score;
-
-            leaderboardScores.push({ 
-                name: playerName, 
-                score: score,
-                correctAnswers: correctAnswers,
-                wrongAnswers: wrongAnswersCount,
-                wrongAnswersList: wrongAnswers
-            });
-            localStorage.setItem('leaderboardScores', JSON.stringify(leaderboardScores));
-            displayLeaderboard();
-            document.getElementById('try-again').style.display = 'block';
-            document.getElementById('reset-leaderboard').style.display = 'block';
-        }
-
-        function displayLeaderboard() {
-            const leaderboardBody = document.getElementById('leaderboard-body');
-            leaderboardBody.innerHTML = '';
-            leaderboardScores.sort((a, b) => b.score - a.score);
-            leaderboardScores.forEach((entry, index) => {
-                const wrongAnswerCount = entry.wrongAnswersList.length;
-                const row = document.createElement('tr');
-                row.innerHTML = `<td>${index + 1}</td><td>${entry.name}</td><td>${entry.score}</td><td>${entry.correctAnswers}</td><td><button class="btn btn-link" onclick="showWrongAnswers('${entry.name}')">${wrongAnswerCount}</button></td>`;
-                leaderboardBody.appendChild(row);
-            });
-        }
-
-        function showWrongAnswers(name) {
-            const entry = leaderboardScores.find(score => score.name === name);
-            const wrongAnswersList = document.getElementById('wrong-answers-list');
-            wrongAnswersList.innerHTML = '';
-            entry.wrongAnswersList.forEach(wrong => {
-                const listItem = document.createElement('li');
-                listItem.innerText = wrong;
-                wrongAnswersList.appendChild(listItem);
-            });
-            document.getElementById('wrong-answers-modal').style.display = 'block';
-        }
-
-        function closeModal() {
-            document.getElementById('wrong-answers-modal').style.display = 'none';
-        }
+            function closeModal() {
+                document.getElementById('wrong-answers-modal').style.display = 'none';
+            }
 
         // Function to shuffle the questions
         function shuffleQuestions() {
